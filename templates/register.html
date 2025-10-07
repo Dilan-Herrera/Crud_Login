@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <img src="{{ url_for('static', filename='user_icon.png') }}" alt="User Icon" />
+        <h3>Crear Usuario</h3>
+
+        <form method="POST">
+            <label for="username">Nuevo usuario</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" required>
+
+            <button type="submit" class="btn-login">Registrar</button>
+
+            {% if error %}
+                <p class="error-label">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
