@@ -2,12 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Usuario</title>
+    <title>Panel Principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body style="font-family: Arial; text-align:center; margin-top: 50px;">
-    <h2>Bienvenido, {{ username }}</h2>
-    <p>Has iniciado sesión correctamente.</p>
-    <a href="/mascotas">Ir al CRUD de Mascotas</a> |
-    <a href="/logout">Cerrar sesión</a>
+<body>
+    <div class="navbar">
+        <h2>🐾 Panel Principal</h2>
+        <div>
+            <span>Hola, {{ username }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="card" onclick="window.location.href='{{ url_for('lista_mascotas') }}'">
+            <h3>📋 Gestión de Mascotas</h3>
+            <p>Agrega, edita o elimina el registro de tus mascotas.</p>
+            <button class="btn-primary">Ir al CRUD</button>
+        </div>
+
+        <div class="card" onclick="alert('Otras funciones próximamente...')">
+            <h3>⚙️ Configuración</h3>
+            <p>Administra tu cuenta y opciones del sistema.</p>
+            <button class="btn-secondary">Ver más</button>
+        </div>
+    </div>
 </body>
 </html>
