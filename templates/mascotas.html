@@ -2,44 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CRUD Mascotas</title>
+    <title>Gestión de Mascotas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body style="text-align:center;">
-    <h2>🐾 Registro de Mascotas</h2>
+<body>
+    <div class="navbar">
+        <h2>🐾 CRUD de Mascotas</h2>
+        <a href="{{ url_for('home') }}" class="btn-secondary">Volver al panel</a>
+    </div>
 
-    <form method="POST" action="/mascotas/add" style="margin-bottom:20px;">
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <input type="text" name="especie" placeholder="Especie" required>
-        <input type="text" name="raza" placeholder="Raza">
-        <input type="number" name="edad" placeholder="Edad">
-        <input type="text" name="propietario" placeholder="Propietario">
-        <button type="submit" class="btn-login">Agregar</button>
-    </form>
+    <div class="form-container">
+        <h3>Registrar nueva mascota</h3>
+        <form method="POST" action="{{ url_for('agregar_mascota') }}">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="especie" placeholder="Especie" required>
+            <input type="text" name="raza" placeholder="Raza">
+            <input type="number" name="edad" placeholder="Edad (años)">
+            <input type="text" name="propietario" placeholder="Propietario">
+            <button type="submit" class="btn-primary">Guardar Mascota</button>
+        </form>
+    </div>
 
-    <table border="1" cellspacing="0" cellpadding="10" align="center">
-        <tr style="background:#004D40;color:white;">
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Especie</th>
-            <th>Raza</th>
-            <th>Edad</th>
-            <th>Propietario</th>
-            <th>Acción</th>
-        </tr>
-        {% for m in mascotas %}
-        <tr>
-            <td>{{ m.id }}</td>
-            <td>{{ m.nombre }}</td>
-            <td>{{ m.especie }}</td>
-            <td>{{ m.raza }}</td>
-            <td>{{ m.edad }}</td>
-            <td>{{ m.propietario }}</td>
-            <td><a href="/mascotas/delete/{{ m.id }}">🗑️ Eliminar</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <p><a href="/dashboard">⬅ Volver al panel</a></p>
+    <div class="list-container">
+        <h3>Listado de Mascotas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Especie</th>
+                    <th>Raza</th>
+                    <th>Edad</th>
+                    <th>Propietario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mascotas %}
+                <tr>
+                    <td>{{ m[1] }}</td>
+                    <td>{{ m[2] }}</td>
+                    <td>{{ m[3] or '-' }}</td>
+                    <td>{{ m[4] or '-' }}</td>
+                    <td>{{ m[5] or '-' }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_mascota', id=m[0]) }}" class="btn-edit">Editar</a>
+                        <a href="{{ url_for('eliminar_mascota', id=m[0]) }}" class="btn-delete" onclick="return confirm('¿Seguro que deseas eliminar esta mascota?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
