@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel protegido</title>
+</head>
+<body style="font-family: Arial; text-align:center; margin-top: 50px;">
+    <h2>Bienvenido, {{ username }} 👋</h2>
+    <p>Has iniciado sesión correctamente.</p>
+    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+</body>
+</html>
