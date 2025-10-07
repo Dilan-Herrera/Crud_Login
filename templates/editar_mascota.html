@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Mascota</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h2>🐾 Editar Mascota</h2>
+        <a href="{{ url_for('lista_mascotas') }}" class="btn-secondary">Volver</a>
+    </div>
+
+    <div class="form-container">
+        <form method="POST">
+            <input type="text" name="nombre" value="{{ mascota[1] }}" required>
+            <input type="text" name="especie" value="{{ mascota[2] }}" required>
+            <input type="text" name="raza" value="{{ mascota[3] }}">
+            <input type="number" name="edad" value="{{ mascota[4] }}">
+            <input type="text" name="propietario" value="{{ mascota[5] }}">
+            <button type="submit" class="btn-primary">Guardar cambios</button>
+        </form>
+    </div>
+</body>
+</html>
