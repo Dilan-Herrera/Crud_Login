@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Mascotas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="text-align:center;">
+    <h2>🐾 Registro de Mascotas</h2>
+
+    <form method="POST" action="/mascotas/add" style="margin-bottom:20px;">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="especie" placeholder="Especie" required>
+        <input type="text" name="raza" placeholder="Raza">
+        <input type="number" name="edad" placeholder="Edad">
+        <input type="text" name="propietario" placeholder="Propietario">
+        <button type="submit" class="btn-login">Agregar</button>
+    </form>
+
+    <table border="1" cellspacing="0" cellpadding="10" align="center">
+        <tr style="background:#004D40;color:white;">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Especie</th>
+            <th>Raza</th>
+            <th>Edad</th>
+            <th>Propietario</th>
+            <th>Acción</th>
+        </tr>
+        {% for m in mascotas %}
+        <tr>
+            <td>{{ m.id }}</td>
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.especie }}</td>
+            <td>{{ m.raza }}</td>
+            <td>{{ m.edad }}</td>
+            <td>{{ m.propietario }}</td>
+            <td><a href="/mascotas/delete/{{ m.id }}">🗑️ Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="/dashboard">⬅ Volver al panel</a></p>
+</body>
+</html>
