@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <img src="{{ url_for('static', filename='user_icon.png') }}" alt="User Icon" />
+        <h3>Login</h3>
+
+        <form method="POST">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Enter your username" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="btn-login">Sign In</button>
+
+            {% if error %}
+                <p class="error-label">{{ error }}</p>
+            {% endif %}
+
+            <button type="button" class="btn-register" onclick="alert('Funcionalidad no implementada');">Register New User</button>
+        </form>
+    </div>
+</body>
+</html>
