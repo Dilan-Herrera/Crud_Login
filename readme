@@ -1,0 +1,62 @@
+# Proyecto MVC con Login y CRUD
+
+Este proyecto es una aplicación web desarrollada en **Python** aplicando el patrón **MVC** (Modelo - Vista - Controlador).  
+Permite registrar usuarios, iniciar sesión y acceder a una sección protegida donde se pueden realizar operaciones **CRUD** (Crear, Leer, Actualizar y Eliminar) sobre registros en una base de datos.
+
+---
+
+## Características
+
+- Login y registro de usuarios con validación.  
+- Protección de rutas: no se puede acceder al DASHBORAD sin iniciar sesión.  
+- Estructura organizada bajo el patrón MVC.  
+- CRUD conectado a base de datos SQLite.  
+- Interfaz web responsive con HTML y CSS.  
+- Desarrollado en Python con Flask.
+
+---
+
+## Estructura del Proyecto
+
+/ProyectoMVC/
+│
+├── main.py 
+│
+│ ├── /templates/ 
+│ │ ├── login.html
+│ │ ├── register.html
+│ │ ├── dashboard.html
+│ │ ├── mascotas.html
+│ │ └── editar_mascota.html
+│
+└── /static/
+└── style.css
+
+
+---
+
+## Tecnologías Utilizadas
+
+- Python  
+- Flask  
+- SQLite  
+- HTML5, CSS3  
+- Patrón MVC
+
+---
+
+## Requisitos Previos
+
+Antes de ejecutar el proyecto, asegúrate de tener instalado:
+
+- Python 3.8 o superior  
+- pip (gestor de paquetes de Python)
+
+---
+
+## ⚙️ Instalación
+
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/Dilan-Herrera/Crud_Login
+   cd ProyectoMVC
