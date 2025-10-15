@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="navbar">
-        <h2>🐾 Panel Principal</h2>
+        <h2> Panel Principal</h2>
         <div>
             <span>Hola, {{ username }}</span>
             <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar sesión</a>
@@ -16,15 +16,9 @@
 
     <div class="dashboard-container">
         <div class="card" onclick="window.location.href='{{ url_for('mascotas') }}'">
-            <h3>📋 Gestión de Mascotas</h3>
+            <h3> Gestión de Mascotas</h3>
             <p>Agrega, edita o elimina el registro de tus mascotas.</p>
             <button class="btn-primary">Ir al CRUD</button>
-        </div>
-
-        <div class="card" onclick="alert('Otras funciones próximamente...')">
-            <h3>⚙️ Configuración</h3>
-            <p>Administra tu cuenta y opciones del sistema.</p>
-            <button class="btn-secondary">Ver más</button>
         </div>
     </div>
 </body>

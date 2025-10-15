@@ -8,12 +8,12 @@
 <body>
     <div class="navbar">
         <h2>🐾 CRUD de Mascotas</h2>
-        <a href="{{ url_for('home') }}" class="btn-secondary">Volver al panel</a>
+        <a href="{{ url_for('dashboard') }}" class="btn-secondary">Volver al panel</a>
     </div>
 
     <div class="form-container">
         <h3>Registrar nueva mascota</h3>
-        <form method="POST" action="{{ url_for('agregar_mascota') }}">
+        <form method="POST" action="{{ url_for('add_mascota') }}">
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="text" name="especie" placeholder="Especie" required>
             <input type="text" name="raza" placeholder="Raza">
@@ -39,14 +39,14 @@
             <tbody>
                 {% for m in mascotas %}
                 <tr>
-                    <td>{{ m[1] }}</td>
-                    <td>{{ m[2] }}</td>
-                    <td>{{ m[3] or '-' }}</td>
-                    <td>{{ m[4] or '-' }}</td>
-                    <td>{{ m[5] or '-' }}</td>
+                    <td>{{ m['nombre'] }}</td>
+                    <td>{{ m['especie'] }}</td>
+                    <td>{{ m['raza'] or '-' }}</td>
+                    <td>{{ m['edad'] or '-' }}</td>
+                    <td>{{ m['propietario'] or '-' }}</td>
                     <td>
-                        <a href="{{ url_for('editar_mascota', id=m[0]) }}" class="btn-edit">Editar</a>
-                        <a href="{{ url_for('eliminar_mascota', id=m[0]) }}" class="btn-delete" onclick="return confirm('¿Seguro que deseas eliminar esta mascota?');">Eliminar</a>
+                        <a href="{{ url_for('edit_mascota', id=m['id']) }}" class="btn-edit">Editar</a>
+                        <a href="{{ url_for('delete_mascota', id=m['id']) }}" class="btn-delete" onclick="return confirm('¿Seguro que deseas eliminar esta mascota?');">Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}

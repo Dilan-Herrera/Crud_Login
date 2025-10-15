@@ -2,22 +2,74 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #004D40, #26A69A);
+        }
+        .login-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 350px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .login-container img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #BDBDBD;
+        }
+        .btn-login {
+            background-color: #FF7043;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-register {
+            background-color: #26A69A;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .error-label {
+            color: #E53935;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
-        <img src="{{ url_for('static', filename='user_icon.png') }}" alt="User Icon" />
-        <h3>Login</h3>
+        <h3>Iniciar Sesión</h3>
 
         <form method="POST">
-            <label for="username">Username</label>
+            <label for="username">Usuario</label>
             <input type="text" name="username" required>
 
-            <label for="password">Password</label>
+            <label for="password">Contraseña</label>
             <input type="password" name="password" required>
 
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
+            <button type="submit" class="btn-login">Entrar</button>
 
             {% if error %}
                 <p class="error-label">{{ error }}</p>

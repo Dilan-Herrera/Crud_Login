@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for, g
+from flask import Flask, render_template, request, redirect, session, url_for, g, send_from_directory
 import sqlite3
 import os
 
@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = "clave_secreta_segura"
 DB_NAME = "mascotas.db"
 
-# CONEXIÓN A LA BASE DE DATOS
+#  CONEXIÓN A LA BASE DE DATOS
 def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(DB_NAME)
@@ -19,7 +19,7 @@ def close_db(error):
     if db is not None:
         db.close()
 
-# INICIALIZAR BASE DE DATOS
+#  INICIALIZAR BASE DE DATOS
 def init_db():
     if not os.path.exists(DB_NAME):
         with sqlite3.connect(DB_NAME) as conn:
@@ -40,11 +40,14 @@ def init_db():
                     propietario TEXT
                 )
             """)
-            # Usuario de ejemplo
             conn.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("admin", "1234"))
-        print("Base de datos creada con éxito")
+        print("✅ Base de datos creada con éxito.")
 
-# LOGIN
+#  RUTAS DE AUTENTICACIÓN
+@app.route('/')
+def home():
+    return redirect(url_for('login'))
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -60,7 +63,6 @@ def login():
             error = "Usuario o contraseña incorrectos"
     return render_template('login.html', error=error)
 
-# REGISTRO DE NUEVOS USUARIOS
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     error = None
@@ -76,14 +78,19 @@ def register():
             error = "El nombre de usuario ya existe"
     return render_template('register.html', error=error)
 
-# DASHBOARD
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
+#  DASHBOARD
 @app.route('/dashboard')
 def dashboard():
     if "user" not in session:
         return redirect(url_for('login'))
     return render_template('dashboard.html', username=session["user"])
 
-# CRUD DE MASCOTAS
+#  CRUD DE MASCOTAS
 @app.route('/mascotas')
 def mascotas():
     if "user" not in session:
@@ -116,13 +123,33 @@ def delete_mascota(id):
     db.commit()
     return redirect(url_for('mascotas'))
 
-# LOGOUT
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('login'))
+@app.route('/mascotas/edit/<int:id>', methods=['GET', 'POST'])
+def edit_mascota(id):
+    if "user" not in session:
+        return redirect(url_for('login'))
+    db = get_db()
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        especie = request.form['especie']
+        raza = request.form['raza']
+        edad = request.form['edad']
+        propietario = request.form['propietario']
+        db.execute("""
+            UPDATE mascotas
+            SET nombre=?, especie=?, raza=?, edad=?, propietario=?
+            WHERE id=?
+        """, (nombre, especie, raza, edad, propietario, id))
+        db.commit()
+        return redirect(url_for('mascotas'))
+    mascota = db.execute("SELECT * FROM mascotas WHERE id=?", (id,)).fetchone()
+    return render_template('editar_mascota.html', mascota=mascota)
 
+#  ARCHIVOS ESTÁTICOS
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
 
+#  MAIN
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)

@@ -4,20 +4,89 @@
     <meta charset="UTF-8">
     <title>Editar Mascota</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #4e73df;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .btn-secondary {
+            background-color: #858796;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #6c757d;
+        }
+
+        .form-container {
+            background-color: white;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-container input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #1cc88a;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #17a673;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
-        <h2>🐾 Editar Mascota</h2>
-        <a href="{{ url_for('lista_mascotas') }}" class="btn-secondary">Volver</a>
+        <h2>Editar Mascota</h2>
+        <a href="{{ url_for('mascotas') }}" class="btn-secondary">Volver</a>
     </div>
 
     <div class="form-container">
         <form method="POST">
-            <input type="text" name="nombre" value="{{ mascota[1] }}" required>
-            <input type="text" name="especie" value="{{ mascota[2] }}" required>
-            <input type="text" name="raza" value="{{ mascota[3] }}">
-            <input type="number" name="edad" value="{{ mascota[4] }}">
-            <input type="text" name="propietario" value="{{ mascota[5] }}">
+            <input type="text" name="nombre" value="{{ mascota[1] }}" placeholder="Nombre" required>
+            <input type="text" name="especie" value="{{ mascota[2] }}" placeholder="Especie" required>
+            <input type="text" name="raza" value="{{ mascota[3] }}" placeholder="Raza">
+            <input type="number" name="edad" value="{{ mascota[4] }}" placeholder="Edad">
+            <input type="text" name="propietario" value="{{ mascota[5] }}" placeholder="Propietario">
             <button type="submit" class="btn-primary">Guardar cambios</button>
         </form>
     </div>
